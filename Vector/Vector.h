@@ -9,7 +9,7 @@ using namespace std;
 template <typename T>
 class Vector {
 private:
-    vector<T> data;
+    T* data;
     size_t size;
 
 public:

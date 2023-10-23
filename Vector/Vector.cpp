@@ -7,7 +7,7 @@
 //Vector<T>::Vector(){}
 
 template <typename T>
-Vector<T>::Vector(size_t dim) : size(dim), data(dim) {}
+Vector<T>::Vector(size_t dim) : size(dim), data(NULL) {}
 
 template <typename T>
 Vector<T>::~Vector() {}
@@ -15,7 +15,11 @@ Vector<T>::~Vector() {}
 template <typename T>
 Vector<T>::Vector(const Vector<T>& other) {
     size = other.size;
-    data = other.data;
+    data = new T[size];
+    for (int i = 0; i < size; i++)
+    {
+        data[i] = other.data[i];
+    }
 }
 
 template <typename T>
@@ -24,7 +28,10 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
         return *this;
     }
     size = other.size;
-    data = other.data;
+    for (int i = 0; i < size; i++)
+    {
+        data[i] = other.data[i];
+    }
     return *this;
 }
 
@@ -63,7 +70,21 @@ Vector<T> Vector<T>::operator+(const Vector<T>& other) const {
 
 template <typename T>
 bool Vector<T>::operator==(const Vector<T>& other) const {
-    return (size == other.size) && (data == other.data);
+    bool f = true;
+    if (size != other.size)
+    {
+        f = false;
+        return f;
+    }
+    for (int i = 0; i < size; i++)
+    {
+        if (data[i] != other.data[i])
+        {
+            f = false;
+            return f;
+        }
+    }
+    return f;
 }
 
 template <typename T>
@@ -75,7 +96,7 @@ template <typename U>
 std::ostream& operator<<(std::ostream& out, const Vector<U>& vec) {
     out << "(";
     for (size_t i = 0; i < vec.size; ++i) {
-        out << vec[i];
+        out << vec.date[i]; 
         if (i < vec.size - 1) {
             out << ", ";
         }
