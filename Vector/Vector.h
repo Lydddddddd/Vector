@@ -22,8 +22,7 @@ public:
 
     size_t getDimension() const;
 
-    T& operator[](size_t index);
-    const T& operator[](size_t index) const;
+    T& operator[](size_t index) const;
 
     Vector<T> operator+(const Vector<T>& other) const;
     bool operator==(const Vector<T>& other) const;

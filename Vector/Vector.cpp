@@ -14,12 +14,7 @@ Vector<T>::~Vector() {}
 
 template <typename T>
 Vector<T>::Vector(const Vector<T>& other) {
-    size = other.size;
-    data = new T[size];
-    for (int i = 0; i < size; i++)
-    {
-        data[i] = other.data[i];
-    }
+    *this = other;
 }
 
 template <typename T>
@@ -28,6 +23,8 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
         return *this;
     }
     size = other.size;
+    delete[] data;
+    data = new T[size];
     for (int i = 0; i < size; i++)
     {
         data[i] = other.data[i];
@@ -41,15 +38,7 @@ size_t Vector<T>::getDimension() const {
 }
 
 template <typename T>
-T& Vector<T>::operator[](size_t index) {
-    if (index >= size) {
-        throw std::out_of_range("Index out of range");
-    }
-    return data[index];
-}
-
-template <typename T>
-const T& Vector<T>::operator[](size_t index) const {
+T& Vector<T>::operator[](size_t index) const {
     if (index >= size) {
         throw std::out_of_range("Index out of range");
     }
